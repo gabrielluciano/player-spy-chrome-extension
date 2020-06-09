@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "PlayerSpy",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://battlefy.com/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
