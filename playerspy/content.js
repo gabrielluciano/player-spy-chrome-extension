@@ -1,63 +1,75 @@
-let nicksBlue = []
-let nicksRed = []
-let nome2 = ''
-let firstplayerBlue = '1'
-let firstplayerRed = '1'
-let blueButton = document.createElement('button')
-let redButton = document.createElement('button')
 let linkBlue = ""
 let linkRed = ""
+
+let firstplayerBlue = '1'
+let firstplayerRed = '1'
+
+let blueButton = document.createElement('button')
+let redButton = document.createElement('button')
+
+blueButton.setAttribute("id", "btnBlue")
+redButton.setAttribute("id", "btnRed")
+
+blueButton.addEventListener("click", clickBlue)
+redButton.addEventListener("click", clickRed)
+
+function clickBlue() {
+    window.open(linkBlue)
+}
+
+function clickRed() {
+    window.open(linkRed)
+}
 
 const interval = setInterval(() => {
     if (document.getElementsByClassName('bfy-table').length == 2) {
         let tabela1 = document.getElementsByClassName('bfy-table')[0]
         let tabela2 = document.getElementsByClassName('bfy-table')[1]
 
+        blueButton.innerHTML = "Ver no OP.GG"
+        redButton.innerHTML = "Ver no OP.GG"
+
         if (tabela1 && tabela2) {
             let playersBlue = tabela1.querySelectorAll('div#match-extras-content td.player-in-game-name')
             let playersRed = tabela2.querySelectorAll('div#match-extras-content td.player-in-game-name')
-            let nome1 = ''
-            if (playersBlue != undefined && playersRed != undefined) {
+
+            if (playersBlue && playersRed) {
                 if ((firstplayerBlue != playersBlue[0].textContent) || (firstplayerRed != playersRed[0].textContent)) {
                     firstplayerBlue = playersBlue[0].textContent
                     firstplayerRed = playersRed[0].textContent
 
-                    nicksBlue = []
-                    nicksRed = []
+                    let nicksBlue = []
+                    let nicksRed = []
 
+                    let playerNick = ''
                     for (let j = 0; j < playersBlue.length; j++) {
 
-                        nome1 = playersBlue[j].textContent
+                        let playerNameBattlefy = playersBlue[j].textContent
 
-                        for (let i = 0; i < nome1.length; i++) {
-                            if (/\w|á|à|â|ã|é|è|ê|í|ï|ó|ô|õ|ö|ú|ç|ñ/gi.test(nome1[i])) {
-                                nome2 += nome1[i]
+                        for (let i = 0; i < playerNameBattlefy.length; i++) {
+                            if (/\w|á|à|â|ã|é|è|ê|í|ï|ó|ô|õ|ö|ú|ç|ñ/gi.test(playerNameBattlefy[i])) {
+                                playerNick += playerNameBattlefy[i]
                             }
                         }
 
-                        nicksBlue.push(nome2.replace(/\C$/, ''))
-                        nome2 = ''
+                        nicksBlue.push(playerNick.replace(/\C$/, ''))
+                        playerNick = ''
                     }
 
+                    playerNick = ''
                     for (let j = 0; j < playersRed.length; j++) {
 
-                        nome1 = playersRed[j].textContent
+                        playerNameBattlefy = playersRed[j].textContent
 
-                        for (let i = 0; i < nome1.length; i++) {
-                            if (/\w|á|à|â|ã|é|è|ê|í|ï|ó|ô|õ|ö|ú|ç|ñ/gi.test(nome1[i])) {
-                                nome2 += nome1[i]
+                        for (let i = 0; i < playerNameBattlefy.length; i++) {
+                            if (/\w|á|à|â|ã|é|è|ê|í|ï|ó|ô|õ|ö|ú|ç|ñ/gi.test(playerNameBattlefy[i])) {
+                                playerNick += playerNameBattlefy[i]
                             }
                         }
 
-                        nicksRed.push(nome2.replace(/\C$/, ''))
-                        nome2 = ''
+                        nicksRed.push(playerNick.replace(/\C$/, ''))
+                        playerNick = ''
                     }
-
-                    blueButton.innerHTML = "Ver no OP.GG"
-                    redButton.innerHTML = "Ver no OP.GG"
-
-                    blueButton.setAttribute("id", "btnBlue")
-                    redButton.setAttribute("id", "btnRed")
 
                     document.querySelector("div.card").appendChild(blueButton)
                     document.querySelector("div.card").appendChild(redButton)
@@ -73,21 +85,8 @@ const interval = setInterval(() => {
                     }
 
                 }
-
-                blueButton.addEventListener("click", clickBlue)
-
-                redButton.addEventListener("click", clickRed)
-
             }
         }
     }
 
 }, 2000)
-
-function clickBlue() {
-    window.open(linkBlue)
-}
-
-function clickRed() {
-    window.open(linkRed)
-}
